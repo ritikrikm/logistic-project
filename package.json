@@ -12,6 +12,7 @@
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "react": "^19.1.0",
+    "react-countup": "^6.5.3",
     "react-dom": "^19.1.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^7.6.1",

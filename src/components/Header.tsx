@@ -4,8 +4,8 @@ import {
   FaHome, FaUser, FaPhoneAlt, FaEnvelope,
   FaMapMarkerAlt, FaTruck, FaSearch, FaInfoCircle
 } from 'react-icons/fa';
-import logo from '../assets/final_logo.png';
 
+import logo from '../../src/assets/logoo.png'
 const Header: React.FC = () => {
   return (
     <div className="shadow-md">
