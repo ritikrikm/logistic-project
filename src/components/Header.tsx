@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaUser, FaPhoneAlt, FaEnvelope,FaMapMarkerAlt,FaTruck,FaSearch,FaInfoCircle } from 'react-icons/fa';
-
+import logo from '../assets/final_logo.png';
 
 
 const Header: React.FC = () => {
@@ -23,9 +23,12 @@ const Header: React.FC = () => {
 
       {/* Main Navigation */}
       <header className="bg-blue-600 text-white px-6 py-3 flex justify-between items-center">
-        <div className="text-2xl font-bold tracking-wide">
-          Vague<span className="text-yellow-300">Logistic</span>
-        </div>
+      <div className="text-2xl font-bold tracking-wide">
+          <Link to="/">
+            <img src={logo} alt="Vague Logistic Logo" className="h-12 w-auto" />
+          </Link>
+      </div>
+
 
         <nav className="flex items-center space-x-6 text-sm font-medium">
           <Link to="/" className="flex items-center gap-1 hover:underline">
