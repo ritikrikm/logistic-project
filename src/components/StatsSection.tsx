@@ -3,7 +3,7 @@ import CountUp from 'react-countup';
 
 interface StatItem {
   id: number;
-  icon: string; // image path or icon component
+  icon: string;
   value: number;
   label: string;
 }
@@ -17,15 +17,15 @@ const stats: StatItem[] = [
 
 const StatsSection: React.FC = () => {
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
+    <section className="py-12 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-center">
         {stats.map((item) => (
           <div key={item.id} className="flex flex-col items-center">
-            <img src={item.icon} alt={item.label} className="h-16 mb-4" />
-            <h3 className="text-4xl font-bold text-blue-600">
+            <img src={item.icon} alt={item.label} className="h-12 sm:h-16 mb-4" />
+            <h3 className="text-3xl sm:text-4xl font-bold text-blue-600">
               <CountUp end={item.value} duration={2.5} />
             </h3>
-            <p className="text-gray-600 mt-1">{item.label}</p>
+            <p className="text-sm sm:text-base text-gray-600 mt-1">{item.label}</p>
           </div>
         ))}
       </div>

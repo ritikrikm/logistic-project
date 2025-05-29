@@ -1,50 +1,51 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaUser, FaPhoneAlt, FaEnvelope,FaMapMarkerAlt,FaTruck,FaSearch,FaInfoCircle } from 'react-icons/fa';
+import {
+  FaHome, FaUser, FaPhoneAlt, FaEnvelope,
+  FaMapMarkerAlt, FaTruck, FaSearch, FaInfoCircle
+} from 'react-icons/fa';
 import logo from '../assets/final_logo.png';
-
 
 const Header: React.FC = () => {
   return (
     <div className="shadow-md">
       {/* Top Bar */}
-      <div className="bg-gray-100 text-sm flex justify-between items-center px-6 py-2">
-        <div className="flex items-center space-x-4 text-gray-700">
-          <FaPhoneAlt className="inline-block" />
+      <div className="bg-gray-100 text-sm flex flex-col sm:flex-row justify-between items-center gap-2 px-4 py-2">
+        <div className="flex items-center gap-3 text-gray-700">
+          <FaPhoneAlt />
           <span>+1 437-123-4567</span>
-          <FaEnvelope className="inline-block" />
+          <FaEnvelope />
           <span>support@vaguelogistic.com</span>
         </div>
-        <div className="flex items-center text-gray-700 space-x-2">
-          <FaMapMarkerAlt className="inline-block" />
+        <div className="flex items-center text-gray-700 gap-2">
+          <FaMapMarkerAlt />
           <span>Reach Us!</span>
         </div>
       </div>
 
       {/* Main Navigation */}
-      <header className="bg-blue-600 text-white px-6 py-3 flex justify-between items-center">
-      <div className="text-2xl font-bold tracking-wide">
+      <header className="bg-blue-600 text-white px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
+        <div className="flex items-center justify-center sm:justify-start">
           <Link to="/">
-            <img src={logo} alt="Vague Logistic Logo" className="h-12 w-auto" />
+            <img src={logo} alt="Vague Logistic Logo" className="h-10 w-auto" />
           </Link>
-      </div>
+        </div>
 
-
-        <nav className="flex items-center space-x-6 text-sm font-medium">
+        <nav className="flex flex-wrap justify-center sm:justify-end gap-4 text-sm font-medium">
           <Link to="/" className="flex items-center gap-1 hover:underline">
-            <FaHome className="inline-block" /> Home
+            <FaHome /> Home
           </Link>
           <Link to="/track" className="flex items-center gap-1 hover:underline">
-            <FaTruck className="inline-block" /> Track
+            <FaTruck /> Track
           </Link>
           <Link to="/about" className="flex items-center gap-1 hover:underline">
-            <FaInfoCircle className="inline-block" /> About
+            <FaInfoCircle /> About
           </Link>
           <Link to="/login" className="flex items-center gap-1 hover:underline">
-            <FaUser className="inline-block" /> Login
+            <FaUser /> Login
           </Link>
           <Link to="/search" className="flex items-center gap-1 hover:underline">
-            <FaSearch className="inline-block" /> Find
+            <FaSearch /> Find
           </Link>
         </nav>
       </header>
