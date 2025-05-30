@@ -23,7 +23,7 @@ const Header: React.FC = () => {
       <div className="bg-secondary-light text-sm flex flex-col sm:flex-row justify-between items-center gap-2 px-4 py-2 text-primary-dark">
         <div className="flex items-center gap-3">
           <FaPhoneAlt />
-          <span>+1 437-123-4567</span>
+          <span>+91 9999120718</span>
           <FaEnvelope />
           <span>support@vagelogistics.com</span>
         </div>
