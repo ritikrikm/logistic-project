@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const AdminLoginForm: React.FC = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [statusMsg, setStatusMsg] = useState('');
   const [error, setError] = useState('');
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,8 +34,8 @@ const AdminLoginForm: React.FC = () => {
 
       if (response.ok) {
         setStatusMsg(data.message || 'Logged in successfully');
-        setForm({ email: '', password: '' });
-        // Redirect or set session/token here
+        login(); // 🔐 Set admin logged in
+        navigate('/admin/contacts'); // 🔁 Redirect to home
       } else {
         setError(data.message || 'Invalid credentials');
       }

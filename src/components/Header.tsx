@@ -1,13 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   FaHome, FaPhoneAlt, FaEnvelope,
-  FaMapMarkerAlt, FaTruck, FaInfoCircle
+  FaMapMarkerAlt, FaTruck, FaInfoCircle, FaSignOutAlt
 } from 'react-icons/fa';
+import { useAuth } from '../context/AuthContext'; // ✅ Import auth context
 
 import logo from '../../src/assets/logoo.png';
 
 const Header: React.FC = () => {
+  const { isAdmin, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <div className="shadow-md">
       {/* Top Bar */}
@@ -42,16 +51,22 @@ const Header: React.FC = () => {
           <Link to="/about" className="flex items-center gap-1 hover:text-secondary-light transition">
             <FaInfoCircle /> About
           </Link>
-          {/* <Link to="/login" className="flex items-center gap-1 hover:text-secondary-light transition">
-            <FaUser /> Login
-          </Link> */}
-      <Link to="/contact" className="flex items-center gap-1 hover:text-secondary-light transition">
-      <FaEnvelope /> Contact
-    </Link>
-    <Link to="/quote" className="flex items-center gap-1 hover:text-secondary-light transition">
-  <FaEnvelope /> Get a Quote
-</Link>
+          <Link to="/contact" className="flex items-center gap-1 hover:text-secondary-light transition">
+            <FaEnvelope /> Contact
+          </Link>
+          <Link to="/quote" className="flex items-center gap-1 hover:text-secondary-light transition">
+            <FaEnvelope /> Get a Quote
+          </Link>
 
+          {/* Show logout only when admin is logged in */}
+          {isAdmin && (
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-1 hover:text-yellow-300 transition"
+            >
+              <FaSignOutAlt /> Logout
+            </button>
+          )}
         </nav>
       </header>
     </div>

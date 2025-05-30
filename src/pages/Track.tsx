@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Lottie from 'lottie-react';
+import trackAnimation from '../animations/track-animation.json';
 
 const Track: React.FC = () => {
   const [trackingNumber, setTrackingNumber] = useState('');
@@ -7,19 +9,9 @@ const Track: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Future backend call logic
-    // try {
-    //   const response = await fetch(`http://localhost:4002/api/track/${trackingNumber}`);
-    //   const data = await response.json();
-    //   // handle success
-    // } catch (error) {
-    //   console.error('Error fetching tracking details:', error);
-    // }
-
     setSubmitted(true);
     setStatusMessage('Coming soon...');
-    console.log("Tracking Number:", trackingNumber); // Placeholder
+    console.log("Tracking Number:", trackingNumber);
   };
 
   return (
@@ -32,6 +24,14 @@ const Track: React.FC = () => {
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-xl p-6 sm:p-8 space-y-5"
       >
+        <div className="flex justify-center">
+          <Lottie
+            animationData={trackAnimation}
+            loop
+            className="w-40 h-40"
+          />
+        </div>
+
         <label className="block">
           <span className="text-gray-700 font-medium">Enter Tracking Number</span>
           <input
