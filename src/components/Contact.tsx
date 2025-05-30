@@ -69,9 +69,8 @@ const ContactForm: React.FC = () => {
   return (
     <section className="bg-gray-50 py-16 px-6">
       <div className="max-w-2xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-primary mb-4">Contact Us</h2>
-        <p className="text-gray-600 mb-8">We'd love to hear from you! Fill out the form below.</p>
-
+      
+       
         {statusMessage && (
           <div className="mb-4 bg-yellow-100 text-yellow-800 p-3 rounded text-sm font-medium">
             {statusMessage}

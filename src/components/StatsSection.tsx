@@ -1,6 +1,6 @@
 import React from 'react';
 import CountUp from 'react-countup';
-import logo2 from '../assets/logo192.png';
+import logo2 from '../assets/plane.png';
 
 interface StatItem {
   id: number;

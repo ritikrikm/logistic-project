@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaFacebookF, FaInstagram, FaEnvelope } from 'react-icons/fa';
-
+import logo from '../assets/logo-whiteo.png'; 
 const Footer: React.FC = () => {
   return (
     <footer className="bg-primary text-white py-10 overflow-x-hidden">
@@ -40,7 +40,16 @@ const Footer: React.FC = () => {
             {/* Column 3 - Social */}
             <div className="flex flex-col items-center">
               <h3 className="text-lg font-semibold text-secondary mb-2">Follow Us</h3>
-              <div className="flex space-x-4 mt-2">
+
+              {/* Logo under the heading */}
+              <img
+                src={logo}
+                alt="Vage Logistics Logo"
+                className="h-10 sm:h-12 w-auto mb-3"
+              />
+
+              {/* Social Media Icons under logo */}
+              <div className="flex space-x-4">
                 <a
                   href="https://facebook.com"
                   target="_blank"
