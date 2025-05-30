@@ -42,24 +42,23 @@ const Hero: React.FC = () => {
         {/* Right Animation + Icons */}
        
         <div className="flex flex-col items-center justify-center gap-6 mt-8 md:mt-0">
-          {/* Truck Animation */}
-        
-
           {/* Feature Highlights */}
-          <div className="flex flex-col gap-3 text-center">
-            <div className="flex items-center gap-2 text-gray-600">
-              <Truck className="w-5 h-5 text-[#0a1f60]" />
-              <span>Nationwide Delivery</span>
+          {/* Feature Highlights – hidden on small screens */}
+            <div className="hidden md:flex flex-col gap-3 text-center">
+              <div className="flex items-center gap-2 text-gray-600">
+                <Truck className="w-5 h-5 text-[#0a1f60]" />
+                <span>Nationwide Delivery</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-600">
+                <Building2 className="w-5 h-5 text-[#0a1f60]" />
+                <span>Business & Residential Shipping</span>
+              </div>
+              <div className="flex items-center gap-2 text-gray-600">
+                <MapPin className="w-5 h-5 text-[#0a1f60]" />
+                <span>Real-Time Tracking</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-gray-600">
-              <Building2 className="w-5 h-5 text-[#0a1f60]" />
-              <span>Business & Residential Shipping</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-600">
-              <MapPin className="w-5 h-5 text-[#0a1f60]" />
-              <span>Real-Time Tracking</span>
-            </div>
-          </div>
+
         </div>
 
       </div>

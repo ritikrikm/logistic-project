@@ -4,7 +4,7 @@ import {
   FaHome, FaPhoneAlt, FaEnvelope,
   FaMapMarkerAlt, FaTruck, FaInfoCircle, FaSignOutAlt
 } from 'react-icons/fa';
-import { useAuth } from '../context/AuthContext'; // ✅ Import auth context
+import { useAuth } from '../context/AuthContext'; 
 
 import logo from '../../src/assets/logoo.png';
 
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
           <FaPhoneAlt />
           <span>+1 437-123-4567</span>
           <FaEnvelope />
-          <span>support@vagelogistic.com</span>
+          <span>support@vagelogistics.com</span>
         </div>
         <div className="flex items-center gap-2">
           <FaMapMarkerAlt />
