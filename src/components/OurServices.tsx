@@ -31,9 +31,9 @@ const services = [
 
 const OurServices: React.FC = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl font-bold text-blue-700 mb-8 text-center">
+        <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-8 text-center">
           Our Services
         </h2>
 

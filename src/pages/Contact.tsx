@@ -1,2 +1,13 @@
-const About: React.FC = () => <h2 className="text-xl">Contact Vague Logistic</h2>;
-export default About;
+// Example in Contact.tsx
+import React from 'react';
+import ContactForm from '../components/Contact';
+
+const Contact: React.FC = () => {
+  return (
+    <div>
+      <ContactForm />
+    </div>
+  );
+};
+
+export default Contact;

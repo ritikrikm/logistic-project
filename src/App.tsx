@@ -7,8 +7,8 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Track from './pages/Track';
-import Login from './pages/Login';
-
+import AdminLoginForm from './components/AdminLoginForm';
+import QuoteForm from './components/QuoteForm';
 const App: React.FC = () => {
   return (
     <Router>
@@ -19,7 +19,8 @@ const App: React.FC = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/track" element={<Track />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/quote" element={<QuoteForm />} />
+          <Route path="/login" element={<AdminLoginForm />} />
         </Routes>
       </main>
       <Footer />

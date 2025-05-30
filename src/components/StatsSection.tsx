@@ -1,5 +1,6 @@
 import React from 'react';
 import CountUp from 'react-countup';
+import logo2 from '../assets/logo192.png';
 
 interface StatItem {
   id: number;
@@ -9,10 +10,10 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { id: 1, icon: '/assets/final_logo.png', value: 20, label: '+Branches' },
-  { id: 2, icon: '/assets/logo192.png', value: 220, label: '+Work Force Team' },
-  { id: 3, icon: '/assets/logo192.png', value: 150, label: '+Satisfied Clients' },
-  { id: 4, icon: '/assets/logo192.png', value: 30, label: '+Pre Own Vehicle' },
+  { id: 1, icon: logo2, value: 20, label: '+Branches' },
+  { id: 2, icon: logo2, value: 220, label: '+Work Force Team' },
+  { id: 4, icon: logo2, value: 30, label: '+Pre Own Vehicle' },
+  { id: 3, icon: logo2, value: 150, label: '+Satisfied Clients' },
 ];
 
 const StatsSection: React.FC = () => {
@@ -22,10 +23,10 @@ const StatsSection: React.FC = () => {
         {stats.map((item) => (
           <div key={item.id} className="flex flex-col items-center">
             <img src={item.icon} alt={item.label} className="h-12 sm:h-16 mb-4" />
-            <h3 className="text-3xl sm:text-4xl font-bold text-blue-600">
+            <h3 className="text-3xl sm:text-4xl font-bold text-primary">
               <CountUp end={item.value} duration={2.5} />
             </h3>
-            <p className="text-sm sm:text-base text-gray-600 mt-1">{item.label}</p>
+            <p className="text-sm sm:text-base text-secondary-dark mt-1">{item.label}</p>
           </div>
         ))}
       </div>
