@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  FaHome, FaUser, FaPhoneAlt, FaEnvelope,
-  FaMapMarkerAlt, FaTruck, FaSearch, FaInfoCircle
+  FaHome, FaPhoneAlt, FaEnvelope,
+  FaMapMarkerAlt, FaTruck, FaInfoCircle
 } from 'react-icons/fa';
 
 import logo from '../../src/assets/logoo.png';
