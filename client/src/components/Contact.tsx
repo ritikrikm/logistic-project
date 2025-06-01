@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-
+import Lottie from 'lottie-react';
+import loadingAnimation from '../animations/loading.json'
 const ContactForm: React.FC = () => {
   const { isAdmin } = useAuth(); 
 
@@ -8,6 +9,7 @@ const ContactForm: React.FC = () => {
   const [selected, setSelected] = useState<any | null>(null);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   useEffect(() => {
     if (isAdmin) {
       fetch('https://logistics-backend-0jfy.onrender.com/api/contact')
@@ -61,7 +63,7 @@ const ContactForm: React.FC = () => {
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+    setIsSubmitting(true);
     try {
       const response = await fetch('https://logistics-backend-0jfy.onrender.com/api/contact', {
         method: 'POST',
@@ -81,6 +83,9 @@ const ContactForm: React.FC = () => {
       console.error('Error submitting contact form:', error);
       setStatusMessage('❌ Network error. Please try again.');
     }
+    finally{
+      setIsSubmitting(false);
+    }
   };
   
 
@@ -94,7 +99,11 @@ const ContactForm: React.FC = () => {
             {statusMessage}
           </div>
         )}
-
+        {isSubmitting && (
+          <div className="mb-4 flex justify-center">
+            <Lottie animationData={loadingAnimation} loop style={{ width: 100, height: 100 }} />
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="bg-white rounded shadow-md p-6 space-y-4 text-left">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
