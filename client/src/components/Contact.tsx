@@ -10,7 +10,7 @@ const ContactForm: React.FC = () => {
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   useEffect(() => {
     if (isAdmin) {
-      fetch('http://localhost:4002/api/contact')
+      fetch('https://logistics-backend-0jfy.onrender.com/api/contact')
         .then(res => res.json())
         .then(data => setContacts(data))
         .catch(err => console.error('Failed to load contacts', err));
@@ -63,7 +63,7 @@ const ContactForm: React.FC = () => {
     e.preventDefault();
   
     try {
-      const response = await fetch('http://localhost:4002/api/contact', {
+      const response = await fetch('https://logistics-backend-0jfy.onrender.com/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),

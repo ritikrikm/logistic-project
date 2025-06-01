@@ -24,7 +24,7 @@ const AdminLoginForm: React.FC = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:4002/api/admin/login', {
+      const response = await fetch('https://logistics-backend-0jfy.onrender.com/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),

@@ -34,7 +34,7 @@ const GetQuoteForm: React.FC = () => {
   });
   useEffect(() => {
     if (isAdmin) {
-      fetch('http://localhost:4002/api/quote')
+      fetch('https://logistics-backend-0jfy.onrender.com/api/quote')
         .then((res) => res.json())
         .then((data) => setQuotes(data))
         .catch((err) => console.error('Failed to load quotes', err));
@@ -113,7 +113,7 @@ const GetQuoteForm: React.FC = () => {
 
     setStatus('Submitting...');
     try {
-      const response = await fetch('http://localhost:4002/api/quote', {
+      const response = await fetch('https://logistics-backend-0jfy.onrender.com/api/quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),

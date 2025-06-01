@@ -17,7 +17,7 @@ const AdminContacts: React.FC = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const res = await fetch('http://localhost:4002/api/contact');
+        const res = await fetch('https://logistics-backend-0jfy.onrender.com/api/contact');
         const data = await res.json();
         setContacts(data);
       } catch (err) {

@@ -11,7 +11,7 @@ const PORT = 4002;
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000', // frontend origin
+  origin: 'https://vage.netlify.app', // frontend origin
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 }));
