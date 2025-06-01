@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*  # In case you have VITE env files
+
+# Mac system files
+.DS_Store
