@@ -63,19 +63,39 @@ router.post('/', async (req, res) => {
   try {
     const contact = new Contact(formData);
     await contact.save();
-
-    if (!slowTimeoutFired) {
-      clearTimeout(timeout);
-      return res.status(201).json({ success: true, message: 'Message saved successfully' });
-    } else {
-      return res.status(202).json({ success: true, message: 'Saved, but fallback email already sent' });
-    }
-  } catch (err) {
     clearTimeout(timeout);
-    console.error('❌ Save error:', err);
-    res.status(500).json({ success: false, message: 'Internal server error' });
-  }
+ // ✅ Send regular confirmation email even on success
+ const normalHtml = `
+ <p><strong>📩 New Contact Submission</strong></p>
+ <p><strong>Name:</strong> ${name}</p>
+ <p><strong>Email:</strong> ${email}</p>
+ <p><strong>Message:</strong></p>
+ <p style="background:#f4f4f4;padding:10px;border-radius:6px;">${message}</p>
+`;
+try {
+  await resend.emails.send({
+    from: 'onboarding@resend.dev',
+    to: 'rajiv.sharma@vagelogistics.com',
+    subject: '📬 New Contact Submission Received',
+    html: normalHtml,
+  });
+} catch (emailErr) {
+  console.error('❌ Confirmation email failed:', emailErr);
+}
+
+if (!slowTimeoutFired) {
+  return res.status(201).json({ success: true, message: 'Message saved successfully' });
+} else {
+  return res.status(202).json({ success: true, message: 'Saved, but fallback email already sent' });
+}
+
+} catch (err) {
+clearTimeout(timeout);
+console.error('❌ Save error:', err);
+return res.status(500).json({ success: false, message: 'Internal server error' });
+}
 });
+   
 
 // GET /api/contact/retry/:id
 router.get('/retry/:id', async (req, res) => {
