@@ -29,7 +29,7 @@ const GetQuoteForm: React.FC = () => {
   const deliveryRef = useRef<HTMLInputElement>(null);
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!,
 
     libraries: ['places'],
   });
