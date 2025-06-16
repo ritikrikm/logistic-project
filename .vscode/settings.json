@@ -1,0 +1,21 @@
+{
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "explorer.confirmDelete": false,
+  
+   
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "never"
+    },
+
+    "files.watcherExclude": {
+      "**/node_modules": true,
+      "**/.git": true,
+      "**/build": true,
+      "**/.cache": true
+    }
+  }
+  

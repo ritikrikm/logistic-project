@@ -18,7 +18,16 @@ const ContactForm: React.FC = () => {
         .catch(err => console.error('Failed to load contacts', err));
     }
   }, [isAdmin]);
-
+  useEffect(() => {
+    let slowTimer: any;
+    if (isSubmitting) {
+      slowTimer = setTimeout(() => {
+        setStatusMessage('⏳ Still saving... Please wait or try again shortly.');
+      }, 8000);
+    }
+    return () => clearTimeout(slowTimer);
+  }, [isSubmitting]);
+  
   if (isAdmin) {
     return (
       <section className="px-6 py-12">
@@ -72,9 +81,11 @@ const ContactForm: React.FC = () => {
       });
   
       const data = await response.json();
-  
-      if (response.ok) {
+      if (response.status === 201) {
         setStatusMessage('✅ Message sent successfully!');
+        setForm({ name: '', email: '', message: '' });
+      } else if (response.status === 202) {
+        setStatusMessage('✅ Message received! Backend was slow — admin has been alerted.');
         setForm({ name: '', email: '', message: '' });
       } else {
         setStatusMessage(data.message || '❌ Failed to send your message.');
