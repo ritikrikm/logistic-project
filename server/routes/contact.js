@@ -100,26 +100,4 @@ return res.status(500).json({ success: false, message: 'Internal server error' }
 // GET /api/contact/retry/:id
 router.get('/retry/:id', async (req, res) => {
   const formData = pendingSaves.get(req.params.id);
-  if (!formData) return res.status(404).send('⛔ Nothing to retry or already saved.');
-
-  try {
-    const contact = new Contact(formData);
-    await contact.save();
-    pendingSaves.delete(req.params.id);
-    res.send('✅ Contact saved successfully on retry.');
-  } catch (err) {
-    res.status(500).send('❌ Retry failed.');
-  }
-});
-
-// GET /api/contact
-router.get('/', async (req, res) => {
-  try {
-    const contacts = await Contact.find().sort({ createdAt: -1 });
-    res.status(200).json(contacts);
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
-
-module.exports = router;
+  if (!formData) return res.status(404).send('⛔ Not
