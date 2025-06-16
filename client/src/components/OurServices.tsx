@@ -1,31 +1,64 @@
 import React from 'react';
 import ServiceCard from './ServiceCard';
-import { FaTruck, FaWarehouse, FaClock } from 'react-icons/fa';
+import {
+  FaPlaneDeparture,
+  FaTruckMoving,
+  FaGlobe,
+  FaShippingFast,
+  FaBoxes,
+  FaWarehouse,
+  FaTruckLoading,
+  FaPeopleCarry,
+} from 'react-icons/fa';
 
 const services = [
   {
     id: 1,
-    title: 'Fast Delivery',
-    description: 'Deliver packages quickly with real-time tracking and updates.',
-    icon: <FaTruck />,
+    title: 'Domestic Air Cargo',
+    description: 'Fast domestic delivery of goods over 10kg via air partners.',
+    icon: <FaPlaneDeparture />,
   },
   {
     id: 2,
-    title: 'Warehouse Storage',
-    description: 'Secure storage for your goods across multiple regions.',
-    icon: <FaWarehouse />,
+    title: 'Domestic Ground Shipping',
+    description: 'Reliable ground transport through leading national networks.',
+    icon: <FaTruckMoving />,
   },
   {
     id: 3,
-    title: '24/7 Support',
-    description: 'We’re always here to help, any time, any day.',
-    icon: <FaClock />,
+    title: 'International Air Express',
+    description: 'Global express shipping via DHL, FedEx, and other partners.',
+    icon: <FaGlobe />,
   },
   {
     id: 4,
-    title: 'Custom Packaging',
-    description: 'Get branded and safe packaging for your products.',
-    icon: <FaClock />,
+    title: 'International Freight',
+    description: 'Port-to-port and door-to-door international cargo handling.',
+    icon: <FaShippingFast />,
+  },
+  {
+    id: 5,
+    title: 'Commercial Shipments',
+    description: 'Branded commercial logistics through global networks.',
+    icon: <FaBoxes />,
+  },
+  {
+    id: 6,
+    title: 'Warehousing',
+    description: 'Secure and scalable warehousing across multiple regions.',
+    icon: <FaWarehouse />,
+  },
+  {
+    id: 7,
+    title: 'Fair & Exhibition Services',
+    description: 'Specialized logistics for exhibitions and trade shows.',
+    icon: <FaPeopleCarry />,
+  },
+  {
+    id: 8,
+    title: 'Import Services',
+    description: 'Efficient import solutions with branded international partners.',
+    icon: <FaTruckLoading />,
   },
 ];
 
