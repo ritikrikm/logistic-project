@@ -52,52 +52,54 @@ router.post('/', async (req, res) => {
       await resend.emails.send({
         from: 'onboarding@resend.dev',
         to: 'rajiv.sharma@vagelogistics.com',
-        subject: '🚨 Contact Save Timeout – Retry Needed',
+        subject: 'Contact Save Timeout – Retry Needed',
         html,
       });
     } catch (emailErr) {
-      console.error('❌ Email send failed:', emailErr);
+      console.error(' Email send failed:', emailErr);
     }
   }, 10000);
 
   try {
     const contact = new Contact(formData);
     await contact.save();
+
+    if (!slowTimeoutFired) {
+      clearTimeout(timeout);
+      return res.status(201).json({ success: true, message: 'Message saved successfully' });
+    } else {
+      return res.status(202).json({ success: true, message: 'Saved, but fallback email already sent' });
+    }
+  } catch (err) {
     clearTimeout(timeout);
- // ✅ Send regular confirmation email even on success
- const normalHtml = `
- <p><strong>📩 New Contact Submission</strong></p>
- <p><strong>Name:</strong> ${name}</p>
- <p><strong>Email:</strong> ${email}</p>
- <p><strong>Message:</strong></p>
- <p style="background:#f4f4f4;padding:10px;border-radius:6px;">${message}</p>
-`;
-try {
-  await resend.emails.send({
-    from: 'onboarding@resend.dev',
-    to: 'rajiv.sharma@vagelogistics.com',
-    subject: '📬 New Contact Submission Received',
-    html: normalHtml,
-  });
-} catch (emailErr) {
-  console.error('❌ Confirmation email failed:', emailErr);
-}
-
-if (!slowTimeoutFired) {
-  return res.status(201).json({ success: true, message: 'Message saved successfully' });
-} else {
-  return res.status(202).json({ success: true, message: 'Saved, but fallback email already sent' });
-}
-
-} catch (err) {
-clearTimeout(timeout);
-console.error('❌ Save error:', err);
-return res.status(500).json({ success: false, message: 'Internal server error' });
-}
+    console.error(' Save error:', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
 });
-   
 
 // GET /api/contact/retry/:id
 router.get('/retry/:id', async (req, res) => {
   const formData = pendingSaves.get(req.params.id);
-  if (!formData) return res.status(404).send('⛔ Not
+  if (!formData) return res.status(404).send(' Nothing to retry or already saved.');
+
+  try {
+    const contact = new Contact(formData);
+    await contact.save();
+    pendingSaves.delete(req.params.id);
+    res.send('✅ Contact saved successfully on retry.');
+  } catch (err) {
+    res.status(500).send(' Retry failed.');
+  }
+});
+
+// GET /api/contact
+router.get('/', async (req, res) => {
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+    res.status(200).json(contacts);
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+module.exports = router;
