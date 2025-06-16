@@ -52,11 +52,11 @@ router.post('/', async (req, res) => {
       await resend.emails.send({
         from: 'onboarding@resend.dev',
         to: 'rajiv.sharma@vagelogistics.com',
-        subject: '🚨 Contact Save Timeout – Retry Needed',
+        subject: 'Contact Save Timeout – Retry Needed',
         html,
       });
     } catch (emailErr) {
-      console.error('❌ Email send failed:', emailErr);
+      console.error(' Email send failed:', emailErr);
     }
   }, 10000);
 
@@ -72,7 +72,7 @@ router.post('/', async (req, res) => {
     }
   } catch (err) {
     clearTimeout(timeout);
-    console.error('❌ Save error:', err);
+    console.error(' Save error:', err);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
@@ -80,7 +80,7 @@ router.post('/', async (req, res) => {
 // GET /api/contact/retry/:id
 router.get('/retry/:id', async (req, res) => {
   const formData = pendingSaves.get(req.params.id);
-  if (!formData) return res.status(404).send('⛔ Nothing to retry or already saved.');
+  if (!formData) return res.status(404).send(' Nothing to retry or already saved.');
 
   try {
     const contact = new Contact(formData);
@@ -88,7 +88,7 @@ router.get('/retry/:id', async (req, res) => {
     pendingSaves.delete(req.params.id);
     res.send('✅ Contact saved successfully on retry.');
   } catch (err) {
-    res.status(500).send('❌ Retry failed.');
+    res.status(500).send(' Retry failed.');
   }
 });
 

@@ -13,6 +13,7 @@ import QuoteForm from './components/QuoteForm';
 import AdminContacts from './pages/AdminContacts'; 
 
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App: React.FC = () => {
   return (
@@ -26,8 +27,17 @@ const App: React.FC = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/track" element={<Track />} />
             <Route path="/quote" element={<QuoteForm />} />
-            <Route path="/admin/contacts" element={<AdminContacts />} />
             <Route path="/login" element={<AdminLoginForm />} />
+            
+            {/*  Protected Admin Route */}
+            <Route 
+              path="/admin/contacts" 
+              element={
+                <ProtectedRoute>
+                  <AdminContacts />
+                </ProtectedRoute>
+              } 
+            />
           </Routes>
         </main>
         <Footer />
