@@ -5,17 +5,12 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
-<<<<<<< HEAD
-import ScrollToTop from './components/ScrollToTop'; 
-//  Lazy load all pages
-=======
 import { WhatsAppWidget } from 'react-whatsapp-widget';
 import 'react-whatsapp-widget/dist/index.css';
 
 import SidePopupFlag from './components/SidePopupFlag'; // Your side popup greeting flag
 
 // Lazy loaded pages/components
->>>>>>> full-app
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -35,7 +30,6 @@ const App: React.FC = () => {
 
         <main className="p-4">
           <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
-          <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
