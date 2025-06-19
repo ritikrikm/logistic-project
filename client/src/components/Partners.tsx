@@ -95,11 +95,12 @@ const Partners: FC = () => {
         <PartnerCarousel title="International Partners" partners={internationalPartners} />
 
         <Link
-          to="/contact"
-          className="inline-block bg-[#0a1f60] text-white px-6 py-3 rounded-md hover:bg-[#07184b] transition text-sm font-medium mt-8"
-        >
-          Become a Partner
-        </Link>
+  to="/contact"
+  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+  className="inline-block bg-[#0a1f60] text-white px-6 py-3 rounded-md hover:bg-[#07184b] transition text-sm font-medium mt-8"
+>
+  Become a Partner
+</Link>
       </div>
     </section>
   );

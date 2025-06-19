@@ -1,8 +1,12 @@
-import { memo, Suspense, lazy } from 'react';
+import { memo, Suspense, lazy, useEffect } from 'react';
 
 const ContactForm = lazy(() => import('../components/Contact'));
 
 const Contact: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   return (
     <>
       {/* Hero Section */}
