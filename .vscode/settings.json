@@ -16,6 +16,8 @@
       "**/.git": true,
       "**/build": true,
       "**/.cache": true
-    }
+    },
+    "typescript.tsserver.maxTsServerMemory": 4096
+
   }
   

@@ -49,11 +49,11 @@ router.post('/', async (req, res) => {
       await resend.emails.send({
         from: 'onboarding@resend.dev',
         to: 'rajiv.sharma@vagelogistics.com',
-        subject: '🚨 Quote Save Timeout – Retry Needed',
+        subject: 'Quote Save Timeout – Retry Needed',
         html,
       });
     } catch (err) {
-      console.error('❌ Timeout email failed:', err);
+      console.error(' Timeout email failed:', err);
     }
   }, 10000);
 
@@ -82,7 +82,7 @@ router.post('/', async (req, res) => {
         html,
       });
     } catch (err) {
-      console.error('❌ Confirmation email failed:', err);
+      console.error('Confirmation email failed:', err);
     }
 
     if (!slowTimeoutFired) {
@@ -100,15 +100,15 @@ router.post('/', async (req, res) => {
 // GET /api/quote/retry/:id
 router.get('/retry/:id', async (req, res) => {
   const data = pendingQuotes.get(req.params.id);
-  if (!data) return res.status(404).send('⛔ Nothing to retry or already saved.');
+  if (!data) return res.status(404).send(' Nothing to retry or already saved.');
 
   try {
     const quote = new Quote(data);
     await quote.save();
     pendingQuotes.delete(req.params.id);
-    res.send('✅ Quote saved successfully on retry.');
+    res.send(' Quote saved successfully on retry.');
   } catch (err) {
-    res.status(500).send('❌ Retry failed.');
+    res.status(500).send(' Retry failed.');
   }
 });
 
