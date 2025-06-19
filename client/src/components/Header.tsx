@@ -45,7 +45,7 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-2">
           <FaMapMarkerAlt />
           <a
-            href="https://www.google.com/maps/place/Vage+Logistics"
+            href="https://maps.app.goo.gl/SkHCDZ1btMB6FYhFA"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline"

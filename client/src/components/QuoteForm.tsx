@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useJsApiLoader } from '@react-google-maps/api';
 import { useAuth } from '../context/AuthContext'; 
+import PackageTypeVisualSelector from './PackageTypeVisualSelector';
 
 const GetQuoteForm: React.FC = () => {
   const initialState = {
@@ -215,7 +216,17 @@ const GetQuoteForm: React.FC = () => {
                 {errors[name] && <span className="text-red-500 text-xs">{errors[name]}</span>}
               </div>
             ))}
-
+ {/* 📦 Package Type Selector */}
+ <PackageTypeVisualSelector
+    onSelect={({ length, width, height }) => {
+      setForm((prev) => ({
+        ...prev,
+        length,
+        width,
+        height,
+      }));
+    }}
+  />
             <div>
               <input
                 ref={pickupRef}
