@@ -1,8 +1,21 @@
-import React from 'react';
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Building2, Truck, MapPin } from 'lucide-react';
 import Lottie from 'lottie-react';
-import heroTruck from '../animations/heroTruck.json';
+import heroTruckAnimation from '../animations/heroTruck.json';
+
+const lottieOptions = {
+  animationData: heroTruckAnimation,
+  loop: true,
+  autoplay: true,
+  className: 'w-full h-full object-cover',
+};
+
+const FEATURES = [
+  { icon: <Truck className="w-5 h-5 text-[#0a1f60]" />, label: 'Nationwide Delivery' },
+  { icon: <Building2 className="w-5 h-5 text-[#0a1f60]" />, label: 'Business & Residential Shipping' },
+  { icon: <MapPin className="w-5 h-5 text-[#0a1f60]" />, label: 'Real-Time Tracking' },
+];
 
 const Hero: React.FC = () => {
   return (
@@ -10,12 +23,7 @@ const Hero: React.FC = () => {
 
       {/* Full-Width Background Animation with Soft White Overlay */}
       <div className="absolute inset-0 z-0">
-        <Lottie
-          animationData={heroTruck}
-          loop
-          autoplay
-          className="w-full h-full object-cover"
-        />
+        <Lottie {...lottieOptions} />
         <div className="absolute inset-0 bg-white opacity-80"></div>
       </div>
 
@@ -40,21 +48,15 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Feature Icons - hidden on small screens */}
+        {/* Right Feature Icons */}
         <div className="flex flex-col items-center justify-start md:justify-center gap-6 mt-10 md:mt-0">
           <div className="hidden md:flex flex-col gap-3 text-center md:text-left">
-            <div className="flex items-center gap-2 text-gray-600">
-              <Truck className="w-5 h-5 text-[#0a1f60]" />
-              <span>Nationwide Delivery</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-600">
-              <Building2 className="w-5 h-5 text-[#0a1f60]" />
-              <span>Business & Residential Shipping</span>
-            </div>
-            <div className="flex items-center gap-2 text-gray-600">
-              <MapPin className="w-5 h-5 text-[#0a1f60]" />
-              <span>Real-Time Tracking</span>
-            </div>
+            {FEATURES.map((item, index) => (
+              <div key={index} className="flex items-center gap-2 text-gray-600">
+                {item.icon}
+                <span>{item.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -62,4 +64,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero;
+export default memo(Hero);

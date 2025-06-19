@@ -2,17 +2,29 @@ import React, { useState } from 'react';
 import Lottie from 'lottie-react';
 import trackAnimation from '../animations/track-animation.json';
 
-
 const Track: React.FC = () => {
   const [trackingNumber, setTrackingNumber] = useState('');
-  const [submitted, setSubmitted] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const trackShipment = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setStatusMessage('Coming soon...');
-    console.log("Tracking Number:", trackingNumber);
+    const trimmed = trackingNumber.trim();
+
+    if (!trimmed) {
+      setStatusMessage('Please enter a tracking number.');
+      return;
+    }
+
+    setLoading(true);
+    setStatusMessage(null);
+
+
+    setTimeout(() => {
+      setLoading(false);
+      setStatusMessage('Feature coming soon... Stay tuned!');
+      console.log("Tracking Number:", trimmed);
+    }, 1500);
   };
 
   return (
@@ -28,15 +40,11 @@ const Track: React.FC = () => {
       {/* Form Section */}
       <section className="max-w-xl w-full mx-auto py-10 px-4 sm:px-6 lg:px-8">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={trackShipment}
           className="bg-white shadow-md rounded-xl p-6 sm:p-8 space-y-5"
         >
           <div className="flex justify-center">
-            <Lottie
-              animationData={trackAnimation}
-              loop
-              className="w-40 h-40"
-            />
+            <Lottie animationData={trackAnimation} loop className="w-40 h-40" />
           </div>
 
           <label className="block">
@@ -53,13 +61,14 @@ const Track: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full bg-primary text-white font-semibold py-3 rounded-md hover:bg-primary-dark transition"
+            disabled={loading}
+            className="w-full bg-primary text-white font-semibold py-3 rounded-md hover:bg-primary-dark transition disabled:opacity-60"
           >
-            Track
+            {loading ? 'Checking...' : 'Track'}
           </button>
         </form>
 
-        {submitted && statusMessage && (
+        {statusMessage && (
           <div className="mt-6 text-center text-sm sm:text-base bg-yellow-100 text-yellow-800 p-3 rounded font-medium">
             {statusMessage}
           </div>

@@ -1,12 +1,36 @@
-import React from 'react';
+import { FC } from 'react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
+import partnerList from '../data/partnerList';
 
-interface PartnersProps {
-  partners: { name: string; logo: string; url?: string }[];
-}
+const Partners: FC = () => {
+  const nationalPartners = partnerList.filter((p) =>
+    [
+      'Blue Dart',
+      'SpiceJet',
+      'Xpressbees',
+      'Skart',
+      'Overseas',
+      'Rajdhani',
+      'The Logisticians',
+      'Times',
+      'Zephyr',
+      'Continental',
+      'Skyways',
+      'TPL',
+      'M5 Continental Logistics',
+      'XP',
+      'Last Mile',
+      'Total Logix',
+      'Ekta Express',
+      'Movein',
+    ].includes(p.name)
+  );
 
-const Partners: React.FC<PartnersProps> = ({ partners }) => {
+  const internationalPartners = partnerList.filter(
+    (p) => !nationalPartners.find((n) => n.name === p.name)
+  );
+
   const settings = {
     dots: false,
     infinite: true,
@@ -32,28 +56,43 @@ const Partners: React.FC<PartnersProps> = ({ partners }) => {
     ],
   };
 
+  const PartnerCarousel = ({
+    title,
+    partners,
+  }: {
+    title: string;
+    partners: typeof partnerList;
+  }) => (
+    <div className="mb-12">
+      <h3 className="text-2xl font-semibold mb-6">{title}</h3>
+      <Slider {...settings}>
+        {partners.map((p) => (
+          <div key={p.name} className="px-4">
+            <a
+              href={p.url ?? '#'}
+              target="_blank"
+              rel="noreferrer"
+              className="block"
+            >
+              <img
+                src={p.logo}
+                alt={p.name}
+                className="mx-auto h-12 object-contain transition duration-200"
+              />
+            </a>
+          </div>
+        ))}
+      </Slider>
+    </div>
+  );
+
   return (
-    <section className="partners py-12 bg-white">
-      <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-semibold mb-8">Trusted by our Partners</h2>
-        <Slider {...settings}>
-          {partners.map((p) => (
-            <div key={p.name} className="px-4">
-              <a
-                href={p.url ?? '#'}
-                target="_blank"
-                rel="noreferrer"
-                className="block"
-              >
-                <img
-                  src={p.logo}
-                  alt={p.name}
-                  className="mx-auto h-12 object-contain transition duration-200"
-                />
-              </a>
-            </div>
-          ))}
-        </Slider>
+    <section className="partners py-16 bg-white">
+      <div className="container mx-auto px-4 text-center">
+      
+
+        <PartnerCarousel title="National Partners" partners={nationalPartners} />
+        <PartnerCarousel title="International Partners" partners={internationalPartners} />
 
         <Link
           to="/contact"

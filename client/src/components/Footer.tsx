@@ -1,6 +1,33 @@
-import React from 'react';
-import { FaFacebookF, FaInstagram, FaEnvelope } from 'react-icons/fa';
-import logo from '../assets/logo-whiteo.png'; 
+
+import { memo } from 'react';
+import { FaFacebookF, FaInstagram, FaEnvelope,FaWhatsapp } from 'react-icons/fa';
+import logo from '../assets/logo-whiteo.png';
+
+const currentYear = new Date().getFullYear();
+
+const SOCIAL_LINKS = [
+  {
+    href: 'https://facebook.com',
+    icon: <FaFacebookF />,
+    className: 'bg-blue-600 hover:bg-blue-700',
+  },
+  {
+    href: 'https://instagram.com',
+    icon: <FaInstagram />,
+    className: 'bg-pink-600 hover:bg-pink-700',
+  },
+  {
+    href: 'mailto:info@overseaslogistic.com',
+    icon: <FaEnvelope />,
+    className: 'bg-red-600 hover:bg-red-700',
+  },
+  {
+    href: 'https://wa.me/919213920001',
+    icon: <FaWhatsapp />,
+    className: 'bg-green-600 hover:bg-green-700', 
+  },
+];
+
 const Footer: React.FC = () => {
   return (
     <footer className="bg-primary text-white py-10 overflow-x-hidden">
@@ -8,6 +35,7 @@ const Footer: React.FC = () => {
         {/* Main Footer Content */}
         <div className="flex justify-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl text-center">
+
             {/* Column 1 - Brand */}
             <div className="flex flex-col items-center">
               <h2 className="text-xl font-bold text-secondary mb-3">Vage Logistics</h2>
@@ -22,16 +50,15 @@ const Footer: React.FC = () => {
               <ul className="text-sm text-gray-300 space-y-1 leading-relaxed">
                 <li>Plot no - 121, Village Bamnoli, Dwarka, Sector 28</li>
                 <li>New Delhi – 110037</li>
-                <li><strong>Sales:</strong> +91-9818367444</li>
-                <li><strong>Phone:</strong> +91-11-47244444</li>
-                <li><strong>Fax:</strong> +91-11-47244426</li>
+                <li><strong>Sales:</strong> +91-9999120718</li>
+                <li><strong>Phone:</strong> +91-9213920001</li>
                 <li>
                   <strong>Email:</strong>{' '}
                   <a
-                    href="mailto:info@vagelogistics.com"
+                    href="mailto:sales@vagelogistics.com"
                     className="underline hover:text-yellow-400"
                   >
-                    info@vagelogistics.com
+                    sales@vagelogistics.com
                   </a>
                 </li>
               </ul>
@@ -40,38 +67,19 @@ const Footer: React.FC = () => {
             {/* Column 3 - Social */}
             <div className="flex flex-col items-center">
               <h3 className="text-lg font-semibold text-secondary mb-2">Follow Us</h3>
-
-              {/* Logo under the heading */}
-              <img
-                src={logo}
-                alt="Vage Logistics Logo"
-                className="h-10 sm:h-12 w-auto mb-3"
-              />
-
-              {/* Social Media Icons under logo */}
+              <img src={logo} alt="Vage Logistics Logo" className="h-10 sm:h-12 w-auto mb-3" />
               <div className="flex space-x-4">
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 bg-blue-600 rounded-full hover:bg-blue-700 transition"
-                >
-                  <FaFacebookF />
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 bg-pink-600 rounded-full hover:bg-pink-700 transition"
-                >
-                  <FaInstagram />
-                </a>
-                <a
-                  href="mailto:info@overseaslogistic.com"
-                  className="p-2 bg-red-600 rounded-full hover:bg-red-700 transition"
-                >
-                  <FaEnvelope />
-                </a>
+                {SOCIAL_LINKS.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`p-2 rounded-full transition ${link.className}`}
+                  >
+                    {link.icon}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -80,7 +88,7 @@ const Footer: React.FC = () => {
         {/* Footer Bottom */}
         <div className="mt-8 border-t border-gray-700 pt-4 text-center text-sm text-gray-400 space-y-2">
           <p>
-            &copy; {new Date().getFullYear()}{' '}
+            &copy; {currentYear}{' '}
             <span className="font-semibold text-white">Vage Logistics</span>. All rights reserved.
           </p>
           <div className="flex justify-center space-x-4">
@@ -93,4 +101,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer;
+export default memo(Footer);
