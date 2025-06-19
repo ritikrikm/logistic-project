@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
   const retryId = uuidv4();
   let slowTimeoutFired = false;
 
+  // Timeout fallback if DB save is slow
   const timeout = setTimeout(async () => {
     slowTimeoutFired = true;
     pendingSaves.set(retryId, formData);
@@ -56,26 +57,46 @@ router.post('/', async (req, res) => {
         html,
       });
     } catch (emailErr) {
-      console.error(' Email send failed:', emailErr);
+      console.error('Timeout email failed:', emailErr);
     }
   }, 10000);
 
   try {
     const contact = new Contact(formData);
     await contact.save();
+    clearTimeout(timeout);
+
+    const html = `
+      <p><strong>📬 New Contact Form Submission</strong></p>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Message:</strong></p>
+      <p style="background:#f4f4f4;padding:10px;border-radius:6px;">${message}</p>
+    `;
+
+    try {
+      await resend.emails.send({
+        from: 'onboarding@resend.dev',
+        to: 'rajiv.sharma@vagelogistics.com',
+        subject: '📬 New Contact Form Submission',
+        html,
+      });
+    } catch (err) {
+      console.error('Confirmation email failed:', err);
+    }
 
     if (!slowTimeoutFired) {
-      clearTimeout(timeout);
-      return res.status(201).json({ success: true, message: 'Message saved successfully' });
+      return res.status(201).json({ success: true, message: 'Message saved and email sent successfully' });
     } else {
       return res.status(202).json({ success: true, message: 'Saved, but fallback email already sent' });
     }
   } catch (err) {
     clearTimeout(timeout);
-    console.error(' Save error:', err);
+    console.error('Save error:', err);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+
 
 // GET /api/contact/retry/:id
 router.get('/retry/:id', async (req, res) => {
