@@ -7,7 +7,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import { WhatsAppWidget } from 'react-whatsapp-widget';
 import 'react-whatsapp-widget/dist/index.css';
-
+import NotFound from './components/NotFound';
 import SidePopupFlag from './components/SidePopupFlag'; // Your side popup greeting flag
 
 // Lazy loaded pages/components
@@ -31,6 +31,7 @@ const App: React.FC = () => {
         <main className="p-4">
           <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
             <Routes>
+            <Route path="*" element={<NotFound />} />
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />

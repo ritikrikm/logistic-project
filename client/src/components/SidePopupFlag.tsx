@@ -74,10 +74,11 @@ const SidePopupFlag: React.FC = () => {
       <div
         role="region"
         aria-label="Personalized greeting"
+        onClick={() => setIsOpen(false)} 
         style={{
           position: 'fixed',
           top: '45%',
-          right: isOpen ? '0' : '-240px', // slide out of view
+          right: isOpen ? '0' : '-240px',
           backgroundColor: '#0a1f60',
           color: 'white',
           padding: '16px 20px',
@@ -94,7 +95,7 @@ const SidePopupFlag: React.FC = () => {
           gap: '4px',
           lineHeight: 1.1,
           transition: 'right 0.3s ease-in-out',
-          cursor: 'default',
+          cursor: 'default', 
         }}
       >
         <button
