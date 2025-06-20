@@ -17,21 +17,23 @@ const GetQuoteForm: React.FC = () => {
     shipmentType: '',
     notes: '',
   };
-  const { isAdmin } = useAuth();
-  const [quotes, setQuotes] = useState<any[]>([]);
-  const [selected, setSelected] = useState<any | null>(null);
+  const { isAdmin } = useAuth(); // ✅ check if admin
+
+  const [quotes, setQuotes] = useState<any[]>([]); // ✅ admin quote list
+  const [selected, setSelected] = useState<any | null>(null); // ✅ admin selected quote
+
   const [form, setForm] = useState(initialState);
   const [status, setStatus] = useState<string | null>(null);
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({}); // ✅ field-level errors
 
   const pickupRef = useRef<HTMLInputElement>(null);
   const deliveryRef = useRef<HTMLInputElement>(null);
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!,
+
     libraries: ['places'],
   });
-
   useEffect(() => {
     if (isAdmin) {
       fetch('https://logistics-backend-0jfy.onrender.com/api/quote')
@@ -40,7 +42,6 @@ const GetQuoteForm: React.FC = () => {
         .catch((err) => console.error('Failed to load quotes', err));
     }
   }, [isAdmin]);
-
   useEffect(() => {
     if (!isLoaded || !pickupRef.current || !deliveryRef.current) return;
 
@@ -79,7 +80,7 @@ const GetQuoteForm: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value.trimStart() });
+    setForm({ ...form, [name]: value.trimStart() }); // ✅ avoid leading whitespace
     setStatus(null);
     setErrors((prev) => ({ ...prev, [name]: '' }));
   };
@@ -90,7 +91,7 @@ const GetQuoteForm: React.FC = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     Object.entries(form).forEach(([key, value]) => {
-      if (key === 'notes') return;
+      if (key === 'notes') return; // optional
       if (!value.trim()) {
         newErrors[key] = 'Required';
       }
@@ -134,12 +135,12 @@ const GetQuoteForm: React.FC = () => {
       setStatus('❌ Network error. Please try again.');
     }
   };
-
   if (isAdmin) {
     return (
-      <section className="px-4 py-12 sm:px-6">
+      <section className="px-6 py-12">
         <h2 className="text-2xl font-bold text-primary mb-4">All Quote Requests</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {quotes.map((q) => (
             <div
               key={q._id}
@@ -152,7 +153,7 @@ const GetQuoteForm: React.FC = () => {
             </div>
           ))}
         </div>
-
+  
         {selected && (
           <div className="mt-6 p-4 border-t bg-white rounded shadow">
             <h4 className="text-xl font-bold text-primary mb-2">Quote from {selected.fullName}</h4>
@@ -164,6 +165,7 @@ const GetQuoteForm: React.FC = () => {
             <p><strong>Type:</strong> {selected.shipmentType}</p>
             <p className="mt-2"><strong>Notes:</strong> {selected.notes}</p>
             <p className="text-sm text-gray-400 mt-2">Submitted on {new Date(selected.createdAt).toLocaleString()}</p>
+  
             <button
               onClick={() => setSelected(null)}
               className="mt-4 bg-secondary text-white px-4 py-2 rounded hover:bg-secondary-dark"
@@ -175,10 +177,9 @@ const GetQuoteForm: React.FC = () => {
       </section>
     );
   }
-
   return (
     <>
-      <div className="bg-primary text-white py-16 text-center px-4 sm:px-6">
+      <div className="bg-primary text-white py-16 text-center px-6">
         <h1 className="text-3xl sm:text-4xl font-bold mb-4">Request a Quote</h1>
         <p className="max-w-2xl mx-auto text-lg">Get a quick estimate by providing your shipment details.</p>
       </div>
@@ -203,7 +204,7 @@ const GetQuoteForm: React.FC = () => {
               ['height', 'Height (in cm)'],
               ['weight', 'Weight (in kg)'],
             ].map(([name, placeholder, type]) => (
-              <div key={name} className="w-full">
+              <div key={name}>
                 <input
                   name={name}
                   type={type || 'text'}
@@ -215,13 +216,17 @@ const GetQuoteForm: React.FC = () => {
                 {errors[name] && <span className="text-red-500 text-xs">{errors[name]}</span>}
               </div>
             ))}
-
-            <PackageTypeVisualSelector
-              onSelect={({ length, width, height }) => {
-                setForm((prev) => ({ ...prev, length, width, height }));
-              }}
-            />
-
+ {/* 📦 Package Type Selector */}
+ <PackageTypeVisualSelector
+    onSelect={({ length, width, height }) => {
+      setForm((prev) => ({
+        ...prev,
+        length,
+        width,
+        height,
+      }));
+    }}
+  />
             <div>
               <input
                 ref={pickupRef}
@@ -246,7 +251,7 @@ const GetQuoteForm: React.FC = () => {
               {errors.deliveryPostalCode && <span className="text-red-500 text-xs">{errors.deliveryPostalCode}</span>}
             </div>
 
-            <div className="col-span-1 sm:col-span-2">
+            <div className="col-span-2">
               <select
                 name="shipmentType"
                 value={form.shipmentType}

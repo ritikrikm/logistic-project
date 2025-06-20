@@ -12,7 +12,7 @@ const lottieOptions = {
 };
 
 const FEATURES = [
-  { icon: <Truck className="w-5 h-5 text-[#0a1f60]" />, label: 'Nationwide & Global Shipping' },
+  { icon: <Truck className="w-5 h-5 text-[#0a1f60]" />, label: 'Nationwide Delivery' },
   { icon: <Building2 className="w-5 h-5 text-[#0a1f60]" />, label: 'Business & Residential Shipping' },
   { icon: <MapPin className="w-5 h-5 text-[#0a1f60]" />, label: 'Real-Time Tracking' },
 ];

@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
               <h3 className="text-lg font-semibold text-secondary mb-2">Contact</h3>
               <ul className="text-sm text-gray-300 space-y-1 leading-relaxed">
                 <li>Plot no - 121, Village Bamnoli, Dwarka, Sector 28</li>
-                <li>New Delhi – 110077</li>
+                <li>New Delhi – 110037</li>
                 <li><strong>Sales:</strong> +91-9999120718</li>
                 <li><strong>Phone:</strong> +91-9213920001</li>
                 <li>
